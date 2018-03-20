@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body style="margin: 130px 0">
+<div class="con-lr0" id="tradeContent">
+    <div style="margin:10px 10px 0 0;">
+        <div class="tree-panel" id="pannel_OrgTree">
+            <div class="tree-title">
+                组织机构<span class="qsfont qsicon-refresh tree_refresh"></span>
+            </div>
+            <div class="tree-content">
+                <div id="OrgTree" data-url="/Component/OrgTree/GetTreeModel?isorg=True&amp;isstat=False&amp;assetunit_ids=-1&amp;assetunit_id=0" class="jstree jstree-1 jstree-default" role="tree" tabindex="0" aria-activedescendant="dep_35" aria-busy="false">
+                    <ul class="jstree-container-ul jstree-children" role="group">
+                        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="org_13_anchor" aria-expanded="true" id="org_13" class="jstree-node  jstree-open jstree-last">
+                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                            <a class="jstree-anchor" href="#" tabindex="-1" id="org_13_anchor">
+                                <i class="jstree-icon jstree-themeicon glyphicon glyphicon-home jstree-themeicon-custom" role="presentation"></i>厦门奔一奔</a>
+                            <ul role="group" class="jstree-children">
+                                <foreach name="data" item="v">
+                                    <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="dep_35_anchor" id="dep_35" class="jstree-node  jstree-leaf jstree-last">
+                                        <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                                        <a class="jstree-anchor" href="#" tabindex="-1" id="{$v.id}">
+                                            <i class="jstree-icon jstree-themeicon glyphicon glyphicon-th-large jstree-themeicon-custom" role="presentation"></i>{$v.name}</a>
+                                        <ul role="group" class="">
+                                          <foreach name="user" item="vo">
+
+                                            <li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="sta_69_anchor" id="sta_69" class="jstree-node  jstree-leaf jstree-last">
+                                                <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                                                <a class="jstree-anchor" href="#" tabindex="-1" id="sta_69_anchor">
+                                                    <i class="jstree-icon jstree-themeicon glyphicon glyphicon-user jstree-themeicon-custom" role="presentation"></i>{$vo.station_name}</a>
+                                            </li>
+                                          </foreach>
+                                     </ul>
+                                    </li>
+                                </foreach>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+ </div>
+
+    <div class="sup-tit  dis-left-280">
+        <h3><i class="i15"></i>部门管理
+            <a href="javascript:;" rel="/Manager/index/Create" titl="添加部门" data-width="480px" data-height="340px" class="showif-department"><span class="add-button">添加部门</span></a>
+        </h3>
+        <!-- 表格 -->
+        <form action="/Manager/index/SysDeptment/List" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#list" id="form0" method="post" novalidate="novalidate"><input data-val="true" data-val-number="字段 PageIndex 必须是一个数字。" data-val-required="PageIndex 字段是必需的。" id="PageIndex" name="PageIndex" type="hidden" value="1"><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="PageSize 字段是必需的。" id="PageSize" name="PageSize" type="hidden" value="15"><input data-val="true" data-val-number="字段 OrgTreeID 必须是一个数字。" data-val-required="OrgTreeID 字段是必需的。" id="OrgTreeID" name="OrgTreeID" type="hidden" value="13"><input data-val="true" data-val-number="字段 OrgTreeType 必须是一个数字。" data-val-required="OrgTreeType 字段是必需的。" id="OrgTreeType" name="OrgTreeType" type="hidden" value="1">            <input type="submit" style="display:none;" id="List_submit">
+        </form>        <div class="surper-box" id="list">
+        <table style="font-size:12px;border:1px solid #eee">
+            <tbody><tr class="title">
+                <td style="width:20%">部门名称</td>
+                <td style="width:20%">部门描述</td>
+                <td style="width:20%">添加时间</td>
+                <td style="width:20%">操作</td>
+            </tr>
+            <foreach name="data" item="v">
+                <tr>
+                    <td>{$v.name}</td>
+                    <td>{$v.describe}</td>
+                    <td>{$v.date}</td>
+                    <td>
+                        <a href="javascript:;" rel="/Manager/SysDeptment/Edit?deptid=SXQ0N1Rhclhja2s9" data-width="480px" data-height="340px" titl="部门编辑" class="showif-edit">
+                            <button type="button" class="cz-button bg-blue">编辑</button>
+                        </a>
+                        <a href="/Manager/index/SysStation?id={$v.id}"data-width="960px" data-height="600px"><button type="button" class="cz-button bg-orange">岗位管理</button></a>
+                        <button type="button" class="cz-button bg-gray" onclick="DeleteDept('SXQ0N1Rhclhja2s9')">删除</button>
+
+                    </td>
+                </tr>
+            </foreach>
+
+
+            </tbody></table>
+    </div>
+    </div>
+</div>
+<div class="layui-layer-shade" id="layui-layer-shade1" times="1" style="z-index:19891014; background-color:#000; opacity:0.9; filter:alpha(opacity=90);display: none"></div>
+<div class="layui-layer layui-layer-iframe  layer-anim" id="layui-layer1" type="iframe" times="1" showtime="0" contype="string" style="display: none;z-index: 19891015; width: 480px; height: 340px; top: 330px; left: 556px;">
+    <div class="layui-layer-title"  style="cursor: move;">添加部门</div>
+    <div  class="layui-layer-content">
+        <iframe class="" name="myFrameNames" id="mainiframes" scrolling="yes" style="height: 350px" frameborder="0" src="/Manager/index/Create"></iframe>
+        <!--<iframe scrolling="auto" allowtransparency="true" id="layui-layer-iframe1"  onload="this.className='';" class="" frameborder="0" name="myFrameName" src="/Manager/index/Create" style=""></iframe>-->
+    </div><span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1"  id="close"></a></span><span class="layui-layer-resize"></span></div>
+
+</body>
+</html>

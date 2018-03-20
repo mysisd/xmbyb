@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<include file="../xmbyb/view/byb_head.html"></include>
+
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="e-body">
+    <div class="edit-box">
+
+        <form action="/Manager/index/Edit" data-ajax="true" data-ajax-begin="onAddBegin" data-ajax-complete="onaddEnd" data-ajax-success="EditSuccess" id="form0" method="post" novalidate="novalidate">
+            <input data-val="true" data-val-number="字段 id 必须是一个数字。" data-val-required="id 字段是必需的。" id="id" name="id" type="hidden" value="{$data.id}">
+            <input data-val="true" data-val-number="字段 department_id 必须是一个数字。" data-val-range="请选择部门" data-val-range-max="2147483647" data-val-range-min="1" id="department_id" name="department_id" type="hidden" value="35">
+            <input data-val="true" data-val-required="add_time 字段是必需的。" id="add_time" name="add_time" type="hidden" value="2017/12/18 16:57:40 +08:00"><input id="is_del" name="is_del" type="hidden" value="False">
+            <input data-val="true" data-val-required="del_time 字段是必需的。" id="del_time" name="del_time" type="hidden" value="0001/1/1 0:00:00 +00:00">
+            <div class="edit-data">
+            <dl>
+                <dt>岗位名称：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="必须输入字母数字中文或下划线" data-val-regex-pattern="^[\u4e00-\u9fa5_a-zA-Z0-9\s]+$" data-val-remote="该部门下岗位名称已经存在" data-val-remote-additionalfields="*.station_name,*.department_id,*.id" data-val-remote-type="post" data-val-remote-url="/Manager/SysStation/CheckE" data-val-required="请输入岗位名称" id="station_name" name="station_name" placeholder="请输入岗位名称" type="text" value="{$data.station_name}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="station_name" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+            <input id="create_bt" type="submit" style="display:none;">
+            <div class="de">
+                <div class="button">
+                    <button type="button" id="create_bb" onclick="Create()" class="de-button bg-blue">确定</button>
+                    <button type="button" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name))" class="de-button bg-gray">取消</button>
+                </div>
+            </div>
+        </form>    </div>
+</div>
+<script type="text/javascript">
+    var EditSuccess = function (data) {
+        if (data.isSuccess) {
+            window.parent.layer.msg("保存成功", { icon: 1 });
+            window.parent.goPageStation(1);
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        else {
+            layer.msg(data.ErrorMessage,{icon:1});
+        }
+    }
+    var onAddBegin = function () {
+        var savebutton = document.getElementById("create_bb");
+        savebutton.innerHTML = "保存中";
+        savebutton.disabled = 'disabled';
+    };
+    var onaddEnd = function () {
+        var savebutton = document.getElementById("create_bb");
+        savebutton.innerHTML = "保存";
+        savebutton.disabled = '';
+    }
+    var Create = function () {
+        $("#create_bt").click();
+    }
+</script>
+
+
+
+
+</body>
+</html>

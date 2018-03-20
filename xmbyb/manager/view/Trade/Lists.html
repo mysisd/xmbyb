@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body style="margin: 130px 22px">
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="con-lr0" id="tradeContent">
+
+
+
+    <title>交易账号管理</title>
+
+
+    <!-- 主内容 -->
+    <div class="sup-tit">
+        <h3>
+            <i class="i8"></i>交易账号管理
+            <a href="javascript:;" rel="/Manager/Trade/create" onclick="showpage(this)" data-width="500px" data-height="600px">
+                <span class="add-button">添加交易账号</span>
+            </a>
+        </h3>
+        <form action="/Manager/Trade/Lists" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#List" id="form0" method="post" novalidate="novalidate"><input data-val="true" data-val-number="字段 PageIndex 必须是一个数字。" data-val-required="PageIndex 字段是必需的。" id="PageIndex" name="PageIndex" type="hidden" value="1"><input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="PageSize 字段是必需的。" id="PageSize" name="PageSize" type="hidden" value="10">                <div class="searchs">
+            <ul>
+                <li>
+                    <span>账号名称：</span>
+                    <input class="ps-text w2" data-val="true" data-val-regex="输入格式不正确" data-val-regex-pattern="^[^<>`~!/@\#}$%:;)(_^{&amp;*=|'+]+$" id="name" name="name" placeholder="请输入账号名称" type="text" value="{$name}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                    </div>
+                </li>
+                <li>
+                    <span>柜台：</span>
+                    <select class="ps-text w2 valid"  data="{:input('param.counter',-1)}"  data-val="true" data-val-number="字段 counter 必须是一个数字。" data-val-required="counter 字段是必需的。" id="counter">
+                        <option selected value="-1">===请选择柜台===</option>
+                        <option value='10'>广发恒生UFX正式柜台</option>
+                        <option value="11">银河普通柜台</option>
+                        <option value="12">广发恒生UFX测试柜台</option>
+                        <option value="13">华鑫普通柜台</option>
+                        <option value="14">西南普通柜台</option>
+                        <option value="15">招商普通柜台</option>
+                        <option value="16">东兴普通柜台</option>
+                        <option value="17">长城普通柜台</option>
+                        <option value="18">华西普通柜台</option>
+                        <option value="19">广发普通柜台</option>
+                        <option value="20">海通普通柜台</option>
+                        <option value="21">新时代柜台</option>
+                        <option value="22">申万宏源普通交易</option>
+                        <option value="23">华林证券普通柜台</option>
+                        <option value="24">海通融券柜台</option>
+                        <option value="25">华福普通柜台</option>
+                        <option value="26">中泰普通柜台</option>
+                        <option value="27">中信建投信用柜台</option>
+                        <option value="28">华融基金柜台</option>
+                        <option value="29">东兴证券信用柜台</option>
+                        <option value="30">平安证券柜台</option>
+                        <option value="31">兴业证券普通柜台</option>
+                        <option value="32">华金普通柜台</option>
+                        <option value="33">国信信用柜台</option>
+                        <option value="34">江海普通柜台</option>
+                        <option value="35">兴业信用柜台</option>
+                        <option value="36">银泰普通柜台</option>
+                    </select>
+                </li>
+                <button id="accountlist_submit" type="submit" class="all-button">搜索</button>
+            </ul>
+        </div>
+        </form>            <!-- 表格 -->
+        <div class="surper-box">
+            <div id="List">
+                <table>
+                    <tbody>
+                    <tr class="title">
+                        <td>账号名称</td>
+                        <td>账号</td>
+                        <td>账号负责人</td>
+                        <td>账号编码</td>
+                        <td>校验码</td>
+                        <td>柜台</td>
+                        <td>创建人</td>
+                        <td>创建时间</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="data" item="v">
+                        <tr class="">
+                            <td>{$v.name}</td>
+                            <td>{$v.account}</td>
+                            <td>{$v.principal}</td>
+                            <td>{$v.account_code}</td>
+                            <td>{$v.check_code}</td>
+                            <td><if condition="$v.counter eq 10">广发恒生UFX正式柜台 <elseif condition="$v.counter eq 11">银河普通柜台</elseif><elseif condition="$v.counter eq 12">广发恒生UFX测试柜台</elseif><elseif condition="$v.counter eq 13">华鑫普通柜台</elseif><elseif condition="$v.counter eq 14">西南普通柜台</elseif><elseif condition="$v.counter eq 15">招商普通柜台</elseif><elseif condition="$v.counter eq 16">东兴普通柜台</elseif><elseif condition="$v.counter eq 17">长城普通柜台</elseif><elseif condition="$v.counter eq 18">华西普通柜台</elseif><elseif condition="$v.counter eq 19">广发普通柜台</elseif><elseif condition="$v.counter eq 20">海通普通柜台</elseif><elseif condition="$v.counter eq 21">新时代柜台</elseif><elseif condition="$v.counter eq 22">申万宏源普通交易</elseif><elseif condition="$v.counter eq 23">华林证券普通柜台</elseif><elseif condition="$v.counter eq 24">海通融券柜台</elseif><elseif condition="$v.counter eq 25">华福普通柜台</elseif><elseif condition="$v.counter eq 26">中泰普通柜台</elseif><elseif condition="$v.counter eq 27">中信建投信用柜台</elseif><elseif condition="$v.counter eq 28">华融基金柜台</elseif><elseif condition="$v.counter eq 29">东兴证券信用柜台</elseif><elseif condition="$v.counter eq 30">平安证券柜台</elseif><elseif condition="$v.counter eq 31">兴业证券普通柜台</elseif><elseif condition="$v.counter eq 32">华金普通柜台</elseif><elseif condition="$v.counter eq 33">国信信用柜台</elseif><elseif condition="$v.counter eq 34">江海普通柜台</elseif><elseif condition="$v.counter eq 35">兴业信用柜台</elseif><elseif condition="$v.counter eq 36">银泰普通柜台</elseif></if> </td>
+                            <td>{$v.creator}</td>
+                            <td>{$v.create_time}</td>
+                            <td>
+                                <button class="switch-qy" onclick="switchchange(this,{$v.id})"><span></span></button>
+                            </td>
+                            <td>
+                                <a href="/Manager/AccountSynchro/AccountSynchro?accountid=dnlTVkZtbmk5VjQ9">
+                                    <button type="button" class="cz-button bg-blue">同步信息</button>
+                                </a>
+                                <a href="javascript:;" rel="/Manager/TradeAccount/Edit/dnlTVkZtbmk5VjQ9" onclick="showpage(this)" data-width="500px" data-height="600px">
+                                    <button type="button" class="cz-button bg-green">编辑</button>
+                                </a>
+                                <a href="javascript:;" rel="/Manager/TradeAccount/SetManager?trade_account_id=58" onclick="showpage(this)" data-width="882px" data-height="500px">
+                                    <button type="button" class="cz-button bg-orange">设置负责人</button>
+                                </a>
+                                <a href="/Manager/TradeAccount/StockPoolManage?account_id=dnlTVkZtbmk5VjQ9&amp;account_name=VXBPMmhhUnFjamc9">
+                                    <button type="button" class="cz-button bg-blue">资产详情</button>
+                                </a>
+                                <button type="button" class="cz-button bg-red" onclick="deltradeaccount('58','模拟')">删除</button>
+
+                            </td>
+                        </tr>
+                    </foreach>
+
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="10">
+
+                        </th>
+                    </tr>
+
+
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div><!--tit  -->
+    <script type="text/javascript">
+        $('.ps-text').each(function () {
+            var select_data=$(this).attr('data');
+
+            $(this).find('option').each(function(){if($(this).val()==select_data){$(this).attr('selected',true);}});
+        })
+        var showpage = function (item) {
+            layer.open({
+                type: 2,
+                title: $(item).find("button,span").html(),
+                shadeClose: true,
+                shade: 0.9,
+                area: [$(item).attr("data-width"), $(item).attr("data-height")],
+                content: $(item).attr("rel")
+            });
+        }
+        var goPage = function (i) {
+            $("#PageIndex").val(i);
+            $("#accountlist_submit").click();
+        }
+        var switchchange = function (item, trade_account_id) {
+            $(item).toggleClass("onswitch-qy");
+            $.ajax({
+                url: "/Manager/Trade/ChangeStatus",
+                data: { trade_account_id: trade_account_id },
+                type: "Post",
+                success: function (data) {
+                    if (data.RequestResult) {
+                        parent.layer.msg("操作成功", { icon: 1 });
+                        window.parent.goPage(1);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+
+
+                    }
+                    else {
+                        parent.layer.msg(data.Message, { icon: 2 });
+                    }
+                },
+                error: function (error) {
+                    parent.layer.msg(error.Message, { icon: 2 });
+                }
+            })
+        }
+        var deltradeaccount = function (account_id, name) {
+            layer.confirm("注意：如果删除交易帐号，此帐号连带的资产单元一并删除，并不可恢复。", {
+                title: "你确定要删除交易帐号" + name + "吗？",
+                icon: 3
+            }, function (index) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Manager/TradeAccount/Delete?trade_account_id=" + account_id,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            window.parent.goPage(1);
+                            layer.msg("交易帐号已被删除！", { icon: 1 });
+                        }
+                        else {
+                            layer.msg(data.ErrorMessage, { icon: 2 });
+                        }
+                        layer.close(index);
+                    },
+                    error: function (error) {
+                        //alert(error.Message);
+                    }
+                });
+            });
+        }
+
+
+
+    </script>
+
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        if(''=="")
+        {
+            $("#tradeContent").removeClass("con-lr-200").addClass("con-lr0");
+        }
+
+    })
+</script>
+
+
+
+</body>
+</html>

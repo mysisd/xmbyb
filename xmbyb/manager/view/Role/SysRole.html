@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body style="margin: 130px 20px;">
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="con-lr0" id="tradeContent">
+    <div class="sup-tit">
+        <h3>
+            <i class="i8"></i>权限管理
+            <a onclick="Create()"><span class="add-button">新建角色</span></a>
+        </h3>
+        <div>
+
+                <table id="list" tabindex="0" role="presentation" aria-multiselectable="false" aria-labelledby="gbox_list" class="ui-jqgrid-btable ui-common-table table table-bordered" style="width: 1554px;">
+
+                </table>
+            </div>
+            </div>
+            </div>
+                <div class="ui-jqgrid-resize-mark" id="rs_mlist">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#list").jqGrid({
+                treeGrid: true,
+                treeGridModel: 'adjacency',
+                ExpandColumn: 'role_name',
+                url: '/Manager/Role/GetList',
+                datatype: 'json',
+                styleUI: 'Bootstrap',
+                width: document.body.clientWidth - 20,
+                mtype: 'POST',
+                colNames: ['id', '角色名', '角色描述', '角色类型', 'role_type', 'parent_id', '添加时间', '操作'],
+                colModel: [
+                    { name: 'id', index: 'id', hidden: true, key: true },
+                    { name: 'role_name', index: 'role_name' },
+                    { name: 'role_describe', index: 'role_describe' },
+                    { name: 'type', index: 'type' },
+                    { name: 'role_type', index: 'role_type', hidden: true },
+                    { name: 'parentId', index: 'parentId', hidden: true },
+                    { name: 'add_time', index: 'add_time', hidden: true },
+                    {
+                        name: 'caozuo', index: 'caozuo',
+                        formatter: function (cellvalue, options, rowObject) {
+                          alert(rowObject)
+                            if ((rowObject.role_type != 1 || "False" == "True") &&( $.inArray(rowObject.id, (JSON.parse('[5]'))) == -1||"False" == "True")) {
+                                return "<a onclick=\"Edit('" + rowObject.id + "')\"><button type=\"button\" class=\"cz-button bg-green\">编辑</button></a>"
+                                    + " <a onclick=\"Delete('" + rowObject.id + "')\"><button type=\"button\" class=\"cz-button bg-gray\">删除</button></a>"
+                                    + " <a onclick=\"SetMenu('" + rowObject.id + "')\"><button type=\"button\" class=\"cz-button bg-blue\">设置菜单</button></a>"
+                            } else {
+                                return "";
+                            }
+                        }
+                    }
+                ],
+                height: innerHeight
+            });
+        });
+
+        var Create = function () {
+            var parentid = $("#list").jqGrid("getGridParam", "selrow") ? $("#list").jqGrid("getGridParam", "selrow") : 0
+            layer.open({
+                type: 2,
+                title: "新建角色",
+                shadeClose: true,
+                shade: 0.9,
+                area: ["500px", "350px"],
+                content: "/Manager/Role/Create?parentid=" + parentid
+            });
+        }
+        var Edit = function (id) {
+            layer.open({
+                type: 2,
+                title: "修改角色",
+                shadeClose: true,
+                shade: 0.9,
+                area: ["500px", "350px"],
+                content: "/Manager/Role/Edit?id=" + id
+            });
+        }
+        var Delete = function (id) {
+            layer.confirm("注意：删除角色将删除其关联的所有下级角色，且不可恢复。", {
+                title: "删除角色",
+                icon: 3
+            }, function (index) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Manager/SysRole/Delete?id=" + id,
+                    success: function (data) {
+                        if (data.RequestResult) {
+                            window.location.reload();
+                            layer.msg("角色已被删除！", { icon: 1 });
+                        }
+                        else {
+                            layer.msg(data.Message, { icon: 2 });
+                        }
+                        layer.close(index);
+                    },
+                    error: function (error) {
+                        layer.msg(error.msg, { icon: 2 });
+                    }
+                });
+            });
+        }
+
+        var SetMenu = function (id) {
+            layer.open({
+                type: 2,
+                title: "设置菜单",
+                shadeClose: true,
+                shade: 0.9,
+                area: ["500px", "600px"],
+                content: "/Manager/SysRole/SetMenu?id=" + id
+            });
+        }
+
+    </script>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        if(''=="")
+        {
+            $("#tradeContent").removeClass("con-lr-200").addClass("con-lr0");
+        }
+    })
+</script>
+
+
+
+<div class="layui-layer-move" style="cursor: move; display: none;"></div></body>
+</html>

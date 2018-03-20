@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="e-body" style="height:250px">
+    <div class="edit-box">
+
+        <form action="/Manager/User/ResetPwd" data-ajax="true" data-ajax-begin="onAddBegin" data-ajax-complete="onaddEnd" data-ajax-method="POST" data-ajax-success="ReserPwdSuccess" id="form0" method="post" novalidate="novalidate">
+            <div class="edit-data">
+            <input data-val="true" data-val-number="字段 ID 必须是一个数字。" data-val-required="ID 字段是必需的。" id="ID" name="ID" type="hidden" value="{$user.id}">
+            <dl><dt></dt><dd>用户 <d style="color:#f7900f; font-size: 16px; font-family:'微软雅黑'">{$user.User_Name}</d></dd></dl>
+            <dl>
+                <dt>用户密码：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="不可输入特殊字符" data-val-regex-pattern="^[0-9a-zA-Z~!@#$^&amp;*.?_]+$" data-val-required="请输入密码" id="User_Pwd" name="User_Pwd" placeholder="请输入用户密码" type="password" value="">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="User_Pwd" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>确认密码：</dt>
+                <dd><input class="text w2" data-val="true" data-val-equalto="两次密码不一致" data-val-equalto-other="*.User_Pwd" data-val-required="请输入密码" id="User_Pwd_Conf" name="User_Pwd_Conf" placeholder="请输入用户密码" type="password" value="">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="User_Pwd_Conf" data-valmsg-replace="true"></span>
+                    </div>
+                </dd></dl>
+            <input id="reserpwd" type="submit" style="display:none;">
+        </div>
+            <div class="de">
+                <div class="button">
+                    <button type="button" id="resert_bt" onclick="ResetPwd()" class="de-button bg-blue">确定</button>
+                    <button type="button" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name))" class="de-button bg-gray">取消</button>
+                </div>
+
+            </div>
+        </form>    </div>
+</div>
+
+<script type="text/javascript">
+    var ResetPwd = function () {
+        $("#reserpwd").click();
+    }
+    var ReserPwdSuccess = function (data) {
+        if (data.isSuccess) {
+            window.parent.layer.msg("保存成功", { icon: 1 });
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        else {
+            layer.msg(data.ErrorMessage,{icon:1});
+        }
+    }
+    var onAddBegin = function () {
+        var savebutton = document.getElementById("resert_bt");
+        savebutton.innerHTML = "保存中";
+        savebutton.disabled = 'disabled';
+    };
+    var onaddEnd = function () {
+        var savebutton = document.getElementById("resert_bt");
+        savebutton.innerHTML = "保存";
+        savebutton.disabled = '';
+    }
+</script>
+
+
+
+</body>
+</html>

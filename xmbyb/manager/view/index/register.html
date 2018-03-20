@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+
+<body>
+<div class="qs_top">
+    <p>欢迎来到极速交易云管理平台!</p>
+</div>
+<div class="qs_header"><img src="/Public/images/logo.png" class="logo fl" alt=""><h2>极速交易云平台</h2></div>
+<!--banner-->
+<div class="banner">
+    <div class="banner-box">
+        <div class="banner-li">
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="banner-img">
+            <ul>
+                <li><a href="javascript:;"><img src="/Public/images/bg1.jpg"></a></li>
+
+            </ul>
+        </div>
+        <div class="auto">
+            <a class="prev" href="javascript:void(0)"></a>
+            <a class="next" href="javascript:void(0)"></a>
+        </div>
+    </div>
+</div>
+<!--<form action="{:url('/manager/index/register')}" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-complete="OnComplete" data-ajax-method="Post" data-ajax-success="OnSuccess" id="from1" method="post">        &lt;!&ndash;登录框&ndash;&gt;-->
+    <div id="from_div" class="login-box">
+        <div class="login-con">
+            <h2 class="h2">用户注册</h2>
+            <input id="remember" name="remember" type="hidden" value="" />
+            <div class="qs-form">
+                <label for="inputtext" class="login-pic login-zh"></label>
+                <input class="login-text w300" id="RegisterName" name="LoginName" placeholder="请输入用户名" type="text" value="" />
+            </div>
+            <div class="qs-form">
+                <label for="inputPassword" class="login-pic login-mm"></label>
+                <input class="login-text w300" id="RegisterPassword" name="LoginPassword" placeholder="请输入密码" type="password" />
+
+            </div>
+            <div id="yzmDiv"  class="qs-form">
+                <label class="login-pic login-yzm"></label>
+                <input class="login-text w140" id="Code" name="Code" placeholder="验证码" type="text" value="" />
+                <input class="" id="firstlogin" name="firstlogin" type="hidden" value="" />
+                <img id="yzmImg" name="yzmImg"  title="看不清楚，换一个" src="{:url('/manager/index/verify')}" class="yzm-img">
+            </div>
+            <button id="register"  class="btn-login">立即注册</button>
+            <!--<div class="checkbox">-->
+                <!--<label>-->
+                    <!--<input type="checkbox" id="cookiename" onclick="isRemember(this)" value="remember-me">保存账号-->
+                <!--</label>-->
+                <!--<a href="#"><i>忘记密码</i></a>-->
+            <!--</div>-->
+        </div>
+    </div>
+<!--</form> -->
+<!--footer-->
+<div class="footer">
+    <p>
+        <span> <span style="font-family:arial">©</span>2017极速交易云管理平台 版权所有    </span>
+
+    </p>
+</div>
+<script>
+    jQuery(".banner").slide({ mainCell: ".banner-img ul", titCell: ".banner-li ul", autoPlay: true, autoPage: "<li></li>", effect: "left", interTime: 10000, trigger: "click", titOnClassName: "cur", });
+</script>
+<script>
+    $(function(){
+        // 刷新验证码
+        var verifyimg = $("#yzmImg").attr("src");
+        $("#yzmImg").click(function(){
+            if( verifyimg.indexOf('?')>0){
+                $("#yzmImg").attr("src", verifyimg+'&random='+Math.random());
+            }else{
+                $("#yzmImg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body>
+<div class="e-body">
+    <div class="edit-box">
+
+        <form action="/Manager/index/Create" data-ajax="true" data-ajax-begin="onAddBegin" data-ajax-complete="onaddEnd" data-ajax-success="CreateSuccess" id="form0" method="post" novalidate="novalidate">
+            <div class="edit-data">
+            <input data-val="true" data-val-number="字段 org_id 必须是一个数字。" id="org_id" name="org_id" type="hidden" value="13">
+            <dl>
+                <dt>上级部门：</dt>
+                <dd>
+                    <select class="text w2" data-val="true" data-val-number="字段 上级部门： 必须是一个数字。" id="parent_id" name="parent_id">
+                        <option selected="selected" value="-1">厦门奔一奔</option>
+
+                </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt>部门名称：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="不可输入特殊字符" data-val-regex-pattern="^[0-9a-zA-Z\u4e00-\u9fa5_\s]+$" data-val-remote="该部门名称已经存在" data-val-remote-additionalfields="*.department_name,*.org_id,*.id" data-val-remote-url="/Manager/SysDeptment/CheckName" data-val-required="请输入部门名称" id="department_name" name="department_name" placeholder="请输入部门名称" type="text" value="">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="department_name" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>部门描述：</dt>
+                <dd>
+                    <textarea class="text w2" cols="20" data-val="true" data-val-regex="不可输入特殊字符" data-val-regex-pattern="^[0-9a-zA-Z\u4e00-\u9fa5_\s]+$" data-val-required="请输入部门描述" id="department_describe" name="department_describe" placeholder="请输入部门描述" rows="2" style="height:80px;"></textarea>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="department_describe" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+
+        </div>
+            <div class="de">
+                <div class="button">
+                    <button type="button" id="savebt" class="de-button bg-blue">确定</button>
+                    <button type="button" id="cancel" class="de-button bg-gray">取消</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

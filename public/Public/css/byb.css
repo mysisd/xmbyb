@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#mainiframe{
+    width: 100%;
+
+}
+.de .button {
+    float: right;
+    margin: -1px 138px;
+}
+.layui-layer-setwin .layui-layer-close1 {
+    background-position: 0 -40px;
+    cursor: pointer;
+    background: url(/Public/images/top-tabico.png);
+}
+.de {
+     background: none;
+    height: 50px;
+    width: 100%;
+    position: relative;
+     bottom: 0;
+     left: 0;
+     float: none;
+}
+

@@ -1,0 +1,73 @@
+<!--头部导航栏-->
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Public/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="head">
+    <div class="">
+        <div class="logo"><img src="/Public/images/logo(1).png"></div>
+        <ul id="navs" class="navs clearfix">
+            <li class="nLi on it">
+                <span><a id="p1" name="taburl" target='myFrameName' href="/Manager/index/index1">组织机构管理<span class="arrows"></span></a></span>
+                <ul class="sub">
+                    <li><a name="taburl" target='myFrameName'  href="/Manager/index/index1">机构信息管理</a></li>
+                    <li><a name="taburl" target='myFrameName'  href="/Manager/index/index1">部门管理</a></li>
+                    <li><a name="taburl"  target='myFrameName' href="/Manager/index/SysStation">岗位管理</a></li>
+                </ul>
+            </li>
+            <li class="nLi">
+                <span><a name="taburl" target='myFrameName' href="/Manager/Trade/trade">交易账户管理</a></span>
+            </li>
+            <li class="nLi">
+                <span><a name="taburl" target='myFrameName'  href="/Manager/User/SysUser">用户管理</a></span>
+            </li>
+            <li class="nLi ">
+                <span><a name="taburl" target='myFrameName'  href="/Manager/Role/SysRole">权限管理</a></span>
+            </li>
+            <div class="fr">
+                <li class="nLi">
+                    <span><a href="#"><img src="/Public/images/tx.jpg">厦门奔一奔<span class="arrows"></span></a></span>
+                    <ul class="sub" style="display: none;">
+                        <li><a href="#" class="openpasswd" rel="/Manager/Home/EditPassword" data-width="485px" data-height="320px">修改密码</a></li>
+                    </ul>
+                </li>
+                <li class="nLi">
+                    <span><a href="/manager/index/login_out"><i class="tc"></i>退出</a></span>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</div>
+
+<div class="tab-top nav nav-tabs" id="maintab">
+    <ul>
+        <li class="cur"  >
+            <a href="/Manager/index/index1" target="myFrameName">首页<span></span></a>
+        </li>
+    </ul>
+</div>
+<!--<div id="mousediv" class="top-right-con">-->
+    <!--<i id="refresh" onclick="Refresh(this)" alt-id="">刷新当前</i>-->
+    <!--<i id="closeother" onclick="CloseOther(this)" alt-id="">关闭其他</i>-->
+    <!--<i onclick="CloseAll()">关闭全部</i>-->
+<!--</div>-->
+<div class="tab-content">
+    <iframe class="" name="myFrameName" id="mainiframe" scrolling="yes"  frameborder="0" ></iframe>
+</div>
+<style>
+
+
+</style>
+<script>
+
+    function changeFrameHeights(){
+        var ifms= document.getElementById("mainiframe");
+        ifms.height=window.screen.availHeight;
+    }
+    window.onresize=function(){ changeFrameHeights();}
+    $(function(){changeFrameHeights();});
+</script>

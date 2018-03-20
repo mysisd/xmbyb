@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+<!-- Modal -->
+
+<div class="e-body">
+    <div class="edit-box">
+        <form action="/Manager/SysRole/Edit" class="form-horizontal" data-ajax="true" data-ajax-begin="onBegin" data-ajax-complete="OnComplete" data-ajax-method="Post" data-ajax-success="onSuccess" id="form0" method="post" novalidate="novalidate"><input data-val="true" data-val-number="字段 id 必须是一个数字。" data-val-required="id 字段是必需的。" id="id" name="id" type="hidden" value="6">            <div class="edit-data">
+            <dl>
+                <dt>角色名称：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="必须输入字母数字中文或下划线" data-val-regex-pattern="^[\u4e00-\u9fa5_a-zA-Z0-9]+$" data-val-remote="角色名称已存在" data-val-remote-additionalfields="*.role_name,*.id,*.parentId" data-val-remote-url="/Manager/SysRole/Check_role_name" data-val-required="请输入角色名称" id="role_name" name="role_name" type="text" value="管理人员">
+                    <div><span class="field-validation-valid Validform_checktip" data-valmsg-for="role_name" data-valmsg-replace="true"></span></div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>上级角色：</dt>
+                <dd>
+                    <input data-val="true" data-val-number="字段 上级角色 必须是一个数字。" id="parentId" name="parentId" type="hidden" value="5">
+                    <input class="text w2" id="role_name" name="role_name" readonly="readonly" type="text" value="机构管理人">
+                    <div><span class="field-validation-valid Validform_checktip" data-valmsg-for="parentId" data-valmsg-replace="true"></span></div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>角色描述：</dt>
+                <dd>
+                    <textarea class="text w2" cols="20" id="role_describe" name="role_describe" rows="2" style="height:80px;">萨德</textarea>
+                    <div><span class="field-validation-valid Validform_checktip" data-valmsg-for="role_describe" data-valmsg-replace="true"></span></div>
+                </dd>
+            </dl>
+        </div>
+            <div class="de">
+                <div class="button">
+                    <button type="submit" id="saveid" class="de-button bg-blue" data-loading-text="保存中...">确定</button>
+                    <button type="button" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name))" class="de-button bg-gray">取消</button>
+                </div>
+
+            </div>
+        </form>    </div>
+</div>
+<script type="text/javascript">
+    var onBegin = function () {
+        $("#saveid").button("loading");
+        //$("#saveid").disabled = 'disabled';
+    }
+    var OnComplete = function () {
+        $("#saveid").button("reset");
+        //$("#saveid").disabled = '';
+    }
+    var onSuccess = function (data) {
+        if (data.RequestResult) {
+            parent.layer.msg("保存成功", { icon: 1 });
+            parent.location.reload(); // 父页面刷新
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        } else {
+            parent.layer.msg(data.Message, { icon: 2 });
+            parent.location.reload(); // 父页面刷新
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+    }
+</script>
+
+
+
+
+</body>
+</html>

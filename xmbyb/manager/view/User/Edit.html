@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body>
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="e-body" style="height:680px">
+    <div class="edit-box">
+
+        <form action="/Manager/User/Edit" data-ajax="true" data-ajax-begin="onAddBegin" data-ajax-complete="onaddEnd" data-ajax-success="EditSuccess" id="form0" method="post" novalidate="novalidate">
+            <div class="edit-data">
+            <input data-val="true" data-val-number="字段 ID 必须是一个数字。" data-val-required="ID 字段是必需的。" id="ID" name="ID" type="hidden" value="214">
+            <input id="Newroles" name="Newroles" type="hidden" value="">
+            <dl>
+                <dt>部门选择：</dt>
+                <dd>
+                    <select class="text w2" data-val="true" data-val-number="字段 DeptID 必须是一个数字。" data-val-range="请选择部门" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="DeptID 字段是必需的。" id="DeptID" name="DeptID">
+                        <option value="-1">选择部门</option>
+                        <option selected="selected" value="{$user.DeptID}"><if condition="$user.DeptID eq 1">厦门盈透 <elseif condition="$user.DeptID eq 2">防守打法</elseif></if></option>
+                    </select>
+                    <div>
+                    <span class="field-validation-valid Validform_checktip" data-valmsg-for="DeptID" data-valmsg-replace="true"></span>
+                </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>用户岗位：</dt>
+                <dd>
+                    <select class="text w2" data-val="true" data-val-number="字段 StationID 必须是一个数字。" data-val-range="请选择岗位" data-val-range-max="2147483647" data-val-range-min="1" data-val-required="请选择岗位" id="StationID" name="StationID">
+                        <option selected="selected" value="{$user.StationID}">{$user.StationID}</option>
+                    </select>
+                    <div>
+                    <span class="field-validation-valid Validform_checktip" data-valmsg-for="StationID" data-valmsg-replace="true"></span>
+                </div>
+                </dd>
+            </dl>
+            <dl style="height:80px">
+                <dt>用户角色：</dt>
+                <dd>
+                    <div id="rolediv" style="height:70px;width:240px;border:1px solid #eee;padding:5px 0 0 5px;overflow-y:auto">
+                        <label>
+                            <input type="checkbox" rel="3" class="p-checkbox"><em></em>总资产管理人
+                        </label><br>
+                        <label>
+                            <input type="checkbox" rel="6" class="p-checkbox"><em></em>管理人员
+                        </label><br>
+                        <label>
+                            <input type="checkbox" rel="2" class="p-checkbox"><em></em>资产单元管理人
+                        </label><br>
+                        <label>
+                            <input type="checkbox" rel="1" checked="" class="p-checkbox"><em></em>投资经理人
+                        </label><br>
+                        <label>
+                            <input type="checkbox" rel="9" class="p-checkbox"><em></em>打
+                        </label><br>
+
+                    </div>
+
+                </dd>
+            </dl>
+            <dl>
+                <dt>用户账号：</dt>
+                <dd>
+                    <input autocomplete="off" class="text w2" data-val="true" data-val-regex="只允许输入字母和下划线" data-val-regex-pattern="^[a-zA-Z_\s]+$" data-val-required="请输入用户名" disabled="disabled" id="User_Name" name="User_Name" placeholder="请输入用户名称" type="text" value="{$user.User_Name}">
+                    <label id="is_exist"></label>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="User_Name" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>真实姓名：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="不可输入特殊字符" data-val-regex-pattern="^[0-9a-zA-Z\u4e00-\u9fa5_\s]+$" data-val-required="请输入真实姓名" id="RealName" name="RealName" placeholder="请输入用户名称" type="text" value="{$user.RealName}">
+                    <label id="is_name_exist"></label>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="RealName" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>电子邮件：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="请输入正确的邮箱格式" data-val-regex-pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$" id="Email" name="Email" placeholder="请输入电子邮件" type="text" value="{$user.Email}">
+                    <label id="is_email_exist_l" style="font-size:8px;color:red"></label>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <input type="hidden" id="is_email_exist">
+            <dl>
+                <dt>身份证号：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="请输入正确的身份证号" data-val-regex-pattern="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" id="UserCer" name="UserCer" placeholder="请输入身份证号" type="text" value="{$user.UserCer}">
+                    <label id="is_cer_exist_l" style="font-size:8px;color:red"></label>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="UserCer" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <input type="hidden" id="is_cer_exist">
+            <dl>
+                <dt>手机号码：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="请输入正确的手机号码" data-val-regex-pattern="^1[3|4|5|8]\d{9}$" id="UserPhone" name="UserPhone" placeholder="请输入手机号码" type="text" value="{$user.UserPhone}">
+                    <label id="is_phone_exist_l" style="font-size:8px;color:red"></label>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="UserPhone" data-valmsg-replace="true"></span>
+                    </div>
+                </dd></dl>
+            <dl>
+                <dt>停机位(元)：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-number="字段 StopTrade 必须是一个数字。" data-val-range="请输入正确的停机位值" data-val-range-max="10000000.00" data-val-range-min="0.00" id="StopTrade" name="StopTrade" placeholder="请输入停机位" type="text" value="{$user.StopTrade}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="StopTrade" data-valmsg-replace="true"></span>
+                    </div>
+                </dd></dl>
+            <dl>
+                <dt>委托次数：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-number="字段 EntrustNum 必须是一个数字。" data-val-range="请输入正确的委托次数" data-val-range-max="2147483647" data-val-range-min="0" id="EntrustNum" name="EntrustNum" placeholder="请输入委托次数" type="text" value="{$user.EntrustNum}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="EntrustNum" data-valmsg-replace="true"></span>
+                    </div>
+                </dd></dl>
+            <input type="hidden" id="is_phone_exist">
+            <input id="edit_submit" type="submit" style="display:none;">
+        </div>
+            <div class="de">
+                <div class="button">
+                    <button type="button" id="edit_bt" onclick="EditSave()" class="de-button bg-blue">确定</button>
+                    <button type="button" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name))" class="de-button bg-gray">取消</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#DeptID").change(function () {
+        var deptid = $(this).val();
+        $.ajax({
+            url: "/Manager/SysUser/GetStaionByDept",
+            data: { deptid: deptid },
+            type: "POST",
+            dateType: "json",
+            success: function (data) {
+                var list = eval('(' + data.Data + ')');
+                var droList = document.getElementById("StationID");
+                droList.options.length = 0;
+                for (var i = 0; i < list.length; i++) {
+                    var option = document.createElement('OPTION');
+                    var cur_person = list[i];
+                    option.text = cur_person.station_name;           //给项赋值
+                    option.value = cur_person.id;
+                    droList.options.add(option);   //将新项添加到DropDownList
+                }
+            },
+            error: function () {
+            },
+        });
+    })
+    $("#DeptID_E").change(function () {
+        var deptid = $(this).val();
+        $.ajax({
+            url: "/Manager/SysUser/GetStaionByDept",
+            data: { deptid: deptid },
+            type: "POST",
+            dateType: "json",
+            success: function (data) {
+                var list = eval('(' + data.Data + ')');
+                var droList = document.getElementById("StationID_E");
+                droList.options.length = 0;
+                for (var i = 0; i < list.length; i++) {
+                    var option = document.createElement('OPTION');
+                    var cur_person = list[i];
+                    option.text = cur_person.station_name;           //给项赋值
+                    option.value = cur_person.id;
+                    droList.options.add(option);   //将新项添加到DropDownList
+                }
+            },
+            error: function () {
+            },
+        });
+    })
+    var CheckUser = function (field,name,id,error) {
+        if (name != "") {
+            $.ajax({
+                url: "/Manager/SysUser/UserInfoCheck",
+                data: { field: field, exsit: name,id:214},
+                type: "POST",
+                dateType: "json",
+                async: false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        document.getElementById(id+"_l").style.color = "red";
+                        document.getElementById(id + "_l").innerHTML = error;
+                        $("#" + id).val(1);
+                    }
+                    else {
+                        document.getElementById(id + "_l").style.color = "green";
+                        document.getElementById(id + "_l").innerHTML = "√";
+                        $("#" + id).val(0);
+                    }
+                },
+                error: function () {
+                },
+            });
+        }
+        else {
+            document.getElementById(id + "_l").innerHTML = "";
+        }
+        return 0;
+
+    }
+    $("#Email").keyup(function () {
+        CheckUser("email", $(this).val(), "is_email_exist", "邮箱已存在");
+    })
+    $("#UserCer").keyup(function () {
+        CheckUser("cer", $(this).val(), "is_cer_exist", "身份证已存在");
+    })
+    $("#UserPhone").keyup(function () {
+        CheckUser("phone", $(this).val(), "is_phone_exist", "手机号已存在");
+    })
+    var EditSave = function () {
+        if ($("#Email").val() != "") {
+            CheckUser("email", $("#Email").val(), "is_email_exist", "邮箱已存在");
+            if ($("#is_email_exist").val() == "1") {
+                return;
+            }
+        }
+        if ($("#UserCer").val() != "") {
+            CheckUser("cer", $("#UserCer").val(), "is_cer_exist", "身份证已存在");
+            if ($("#is_cer_exist").val() == "1") {
+                return;
+            }
+        }
+        if ($("#UserPhone").val() != "") {
+            CheckUser("phone", $("#UserPhone").val(), "is_phone_exist", "手机号已存在");
+            if ($("#is_phone_exist").val() == "1") {
+                return;
+            }
+        }
+        $("#rolediv").find('input[type="checkbox"]').each(function () {
+            var role="";
+            if ($(this).is(':checked')) {
+                if ($("#Newroles").val() == "")
+                    role = $(this).attr("rel");
+                else
+                    role = $("#Newroles").val() + "," + $(this).attr("rel");
+                $("#Newroles").val(role);
+            }
+        });
+        if($("#Newroles").val() == "")
+        {
+            layer.msg("请选择角色", { icon: 2 });
+            return;
+        }
+        $("#edit_submit").click();
+    }
+    var EditSuccess = function (data) {
+        if (data.isSuccess) {
+            window.parent.layer.msg("保存成功",{icon:1});
+            window.parent.goPageSysUser(window.parent.$("#PageIndex").val());
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+        }
+        else {
+            layer.msg(data.ErrorMessage,{icon:1});
+        }
+    }
+    var onAddBegin = function () {
+        var savebutton = document.getElementById("edit_bt");
+        savebutton.innerHTML = "保存中";
+        savebutton.disabled = 'disabled';
+    };
+    var onaddEnd = function () {
+        var savebutton = document.getElementById("edit_bt");
+        savebutton.innerHTML = "保存";
+        savebutton.disabled = '';
+    }
+</script>
+
+
+
+</body>
+</html>

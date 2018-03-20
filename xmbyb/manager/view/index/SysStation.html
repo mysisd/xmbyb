@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body style="margin: 130px 20px">
+<div id="inner-loading" style="display:none;">
+ <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+  <img src="/Content/images/loading1.gif"><br>
+  加载中...
+ </div>
+</div>
+
+<div class="con-lr0" id="tradeContent">
+ <div>
+
+
+  <div class="tree-panel" id="pannel_OrgTree">
+   <div class="tree-title">
+    组织机构<span class="qsfont qsicon-refresh tree_refresh"></span>
+   </div>
+   <div class="tree-content">
+    <div id="OrgTree" data-url="/Component/OrgTree/GetTreeModel?isorg=True&amp;isstat=False&amp;assetunit_ids=-1&amp;assetunit_id=0" class="jstree jstree-1 jstree-default" role="tree" tabindex="0" aria-activedescendant="org_13" aria-busy="false">
+     <ul class="jstree-container-ul jstree-children" role="group">
+      <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="org_13_anchor" aria-expanded="true" id="org_13" class="jstree-node  jstree-open jstree-last">
+       <i class="jstree-icon jstree-ocl" role="presentation"></i>
+       <a class="jstree-anchor" href="#" tabindex="-1" id="org_13_anchor">
+        <i class="jstree-icon jstree-themeicon glyphicon glyphicon-home jstree-themeicon-custom" role="presentation"></i>厦门奔一奔</a>
+       <ul role="group" class="jstree-children">
+        <foreach name="data" item="v">
+         <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="dep_35_anchor" id="dep_35" class="jstree-node  jstree-leaf jstree-last">
+          <i class="jstree-icon jstree-ocl" role="presentation"></i>
+          <a class="jstree-anchor" href="#" tabindex="-1" id="">
+           <i class="jstree-icon jstree-themeicon glyphicon glyphicon-th-large jstree-themeicon-custom" role="presentation"></i>{$v.name}</a>
+         </li>
+
+        </foreach>
+       </ul>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+
+
+ </div>
+ <div class="sup-tit dis-left-280">
+  <h3><i class="i8"></i>岗位管理
+   <a href="javascript:;" rel="/Manager/index/Create_job?id={$id}" titl="添加岗位" data-width="550px" data-height="300px" class="showif"><span class="add-button">+添加岗位</span></a>
+  </h3>
+  <div class="searchs">
+
+   <form action="/Manager/index/SysStation" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#list" id="List_submit" method="post" novalidate="novalidate">
+    <input type="hidden" id="idvalues" name="idvalues">
+    <input data-val="true" data-val-number="字段 SearchLevel 必须是一个数字。" data-val-required="SearchLevel 字段是必需的。" id="SearchLevel" name="SearchLevel" type="hidden" value="2">
+    <input data-val="true" data-val-number="字段 TypeID 必须是一个数字。" data-val-required="TypeID 字段是必需的。" id="TypeID" name="TypeID" type="hidden" value="{$id}">
+    <input data-val="true" data-val-number="字段 PageIndex 必须是一个数字。" data-val-required="PageIndex 字段是必需的。" id="PageIndex" name="PageIndex" type="hidden" value="1">
+    <input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="PageSize 字段是必需的。" id="PageSize" name="PageSize" type="hidden" value="15">        <ul>
+     <li>
+      <span>岗位名：</span>
+      <input class="text w4" id="StationName" name="StationName" placeholder="请输入岗位名搜索" type="text" value="">
+     </li>
+     <button type="button" onclick="Search()" class="all-button">搜索</button>
+     <input type="submit" id="list_submit" style="display:none;">
+    </ul>
+   </form>    </div>
+
+  <div class="surper-box" id="list">
+   <table>
+    <tbody><tr class="title">
+     <td>所属部门</td>
+     <td>岗位名</td>
+     <td style="width:17%">创建时间</td>
+     <td style="width:12%">操作</td>
+    </tr>
+<foreach name="data1" item="v1">
+ <tr class="">
+  <td><if condition="$v1.department_id eq 1">厦门盈透 <elseif condition="$v1.department_id eq 2">防守打法</elseif></if></td>
+  <td>{$v1.station_name}</td>
+  <td>{$v1.create_time}</td>
+  <td>
+   <a href="javascript:;" rel="/Manager/index/Edit?id={$v1.id}" titl="编辑岗位" data-width="500px" data-height="300px" class="showif-user">
+    <button type="button" class="cz-button bg-blue">编辑</button></a>
+   <button type="button" rel="69" onclick="Delete('aUJVMDM1dnhGQVk9')" class="cz-button bg-gray">删除</button>
+  </td>
+ </tr>
+    </foreach>
+
+    </tbody></table>
+
+   <script type="text/javascript">
+       $('.showif-user').on('click', function () {
+           layer.open({
+               type: 2,
+               title: $(this).attr("titl"),
+               shadeClose: true,
+               shade: 0.9,
+               area: [$(this).attr("data-width"), $(this).attr("data-height")],
+               content: $(this).attr("rel")
+           });
+       });
+
+       var Delete = function (i) {
+           layer.confirm("即将删除岗位相关信息，删除后将不可恢复！",{
+               title: "确定要岗位吗?",
+               icon:3
+           }, function (index) {
+               $.ajax({
+                   type: "POST",
+                   url: "/Manager/SysStation/Delete?hid=" + i,
+                   success: function (data) {
+                       if (data.isSuccess) {
+                           goPageStation($("#PageIndex").val());
+                           layer.msg( data.SuccessMessage,  {icon:2});
+                       }
+                       else {
+                           layer.msg(data.ErrorMessage, {icon:2});
+                       } layer.close(index);
+                   },
+                   error: function (error) {
+                       layer.msg(error.Message, { icon: 2 }); layer.close(index);
+                   }
+               });
+           });
+       }
+       window.parent.layer.closeAll("loading");
+   </script>
+
+
+  </div>
+ </div>
+ <script type="text/javascript">
+     var OnTreeClick = function (id) {
+         //layer.load();
+         $("#PageIndex").val(1);
+         $("#TypeID").val(id.replace(/[^0-9]/ig, ""));
+         $("#idvalues").val(id.replace(/[^0-9]/ig, ""))
+         if (id.indexOf("org") > -1) {
+             $("#SearchLevel").val(2);
+         } if (id.indexOf("dep") > -1) {
+             $("#SearchLevel").val(1);
+         }
+         $("#list_submit").click();
+     }
+
+     $('.showif').on('click', function () {
+         layer.open({
+             type: 2,
+             title: $(this).attr("titl"),
+             shadeClose: true,
+             shade: 0.9,
+             area: [$(this).attr("data-width"), $(this).attr("data-height")],
+             content: $(this).attr("rel")+"?did="+$("#TypeID").val()
+         });
+     });
+     var Search = function () {
+         //layer.load();
+         $("#PageIndex").val(1);
+         $("#list_submit").click();
+     }
+     var goPageStation = function (i) {
+         //layer.load();
+         $("#PageIndex").val(i);
+         $("#list_submit").click();
+     };
+ </script>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        if(''=="")
+        {
+            $("#tradeContent").removeClass("con-lr-200").addClass("con-lr0");
+        }
+    })
+</script>
+
+
+
+</body>
+</html>

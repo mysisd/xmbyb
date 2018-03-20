@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body class="e-body">
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+<form action="/Manager/TradeAccount/Edit/dnlTVkZtbmk5VjQ9" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-complete="OnComplete" data-ajax-method="Post" data-ajax-success="OnSuccess" id="account_edit_form" method="post" novalidate="novalidate"><input data-val="true" data-val-number="字段 id 必须是一个数字。" data-val-required="id 字段是必需的。" id="id" name="id" type="hidden" value="dnlTVkZtbmk5VjQ9"><input name="_id" type="hidden" value="dnlTVkZtbmk5VjQ9"><input data-val="true" data-val-number="字段 trade_orgid 必须是一个数字。" id="trade_orgid" name="trade_orgid" type="hidden" value="13">
+    <div class="edit-box">
+        <div class="edit-data">
+            <input type="text" style="z-index:-1;position:absolute;width:0px;border:1px solid #ffffff">
+            <input type="password" style="z-index:-1;position:absolute;width:0px;border:1px solid #fff;">
+            <dl>
+                <dt>柜台：</dt>
+                <dd>
+                    <select class="sel-box w2" data-val="true" data-val-number="字段 柜台 必须是一个数字。" data-val-required="请选择柜台" id="counter_id" name="counter_id" onchange="ChangeCounter()">
+                        <option value="">===请选择柜台===</option>
+                        <option value="10">广发恒生UFX正式柜台</option>
+                        <option  value="11">银河普通柜台</option>
+                        <option value="12">广发恒生UFX测试柜台</option>
+                        <option value="13">华鑫普通柜台</option>
+                        <option value="14">西南普通柜台</option>
+                        <option value="15">招商普通柜台</option>
+                        <option value="16">东兴普通柜台</option>
+                        <option value="17">长城普通柜台</option>
+                        <option value="18">华西普通柜台</option>
+                        <option value="19">广发普通柜台</option>
+                        <option value="20">海通普通柜台</option>
+                        <option value="21">新时代柜台</option>
+                        <option value="22">申万宏源普通交易</option>
+                        <option value="23">华林证券普通柜台</option>
+                        <option value="24">海通融券柜台</option>
+                        <option value="25">华福普通柜台</option>
+                        <option value="26">中泰普通柜台</option>
+                        <option value="27">中信建投信用柜台</option>
+                        <option value="28">华融基金柜台</option>
+                        <option value="29">东兴证券信用柜台</option>
+                        <option value="30">平安证券柜台</option>
+                        <option value="31">兴业证券普通柜台</option>
+                        <option value="32">华金普通柜台</option>
+                        <option value="33">国信信用柜台</option>
+                        <option value="34">江海普通柜台</option>
+                        <option value="35">兴业信用柜台</option>
+                        <option value="36">银泰普通柜台</option>
+                    </select>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="counter_id" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>账号类型：</dt>
+                <dd>
+                    <select class="sel-box w2" data-val="true" data-val-number="字段 账户类型 必须是一个数字。" data-val-required="请选择账户类型" id="type" name="type" onchange="ChangeType()"><option value="">===请选择账号类型===</option>
+                        <option value="1">基金</option>
+                        <option  value="2">普通账户</option>
+                        <option value="3">信用账户</option>
+                    </select>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="type" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <div id="is_normal" style="display:block">
+                <dl>
+                    <dt>营业部：</dt>
+                    <dd>
+                        <select class="sel-box w2" data-val="true" data-val-number="字段 营业部 必须是一个数字。" data-val-required="请选选择营业部" id="trade_counter_sales_id" name="trade_counter_sales_id"><option value="">===请选择营业部===</option>
+                            <option selected="selected" value="7">默认营业部</option>
+                        </select>
+                        <div>
+                            <span class="field-validation-valid Validform_checktip" data-valmsg-for="trade_counter_sales_id" data-valmsg-replace="true"></span>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <dl>
+                <dt>交易账号：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="必须输入字母数字中文或下划线" data-val-regex-pattern="^[\u4e00-\u9fa5_a-zA-Z0-9]+$" data-val-remote="柜台下已存在该账户" data-val-remote-additionalfields="*.account,*.id,*.counter_id" data-val-remote-url="/Manager/TradeAccount/Check_account_account" data-val-required="请选输入交易账号" id="account" name="account" placeholder="请输入交易账号" type="text" value="{$data.account}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="account" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>交易密码：</dt>
+                <dd>
+                    <input class="text w2" id="pwd_edit" name="pwd_edit" placeholder="未修改" type="password" value="{$data.pwd}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="pwd_edit" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>通讯密码：</dt>
+                <dd>
+                    <input class="text w2" id="compwd_edit" name="compwd_edit" placeholder="未修改" type="password" value="{$data.compwd}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="compwd_edit" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>账号名称：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-regex="必须输入字母数字中文或下划线" data-val-regex-pattern="^[\u4e00-\u9fa5_a-zA-Z0-9]+$" data-val-remote="账户名称已存在，请重新输入" data-val-remote-additionalfields="*.name,*.id,*.trade_orgid" data-val-remote-url="/Manager/TradeAccount/Check_account_name" data-val-required="请输入账户名称" id="name" name="name" placeholder="请输入账号名称" type="text" value="{$data.name}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="name" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>客户号：</dt>
+                <dd>
+                    <input class="text w2" id="customer" name="customer" placeholder="请输入客户号" type="text" value="{$data.customer}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="customer" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>原始资金（元）：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-number="字段 原始资金 必须是一个数字。" data-val-range="原始资金必须在0到999999999之间" data-val-range-max="999999999" data-val-range-min="0" data-val-required="请输入原始资金" id="money" name="money" placeholder="请输入原始资金" type="text" value="{$data.money}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="money" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>账号状态：</dt>
+                <dd>
+                    <select class="sel-box w2" data-val="true" data-val-number="字段 账户状态 必须是一个数字。" data-val-required="请选择账户状态" id="status" name="status"><option selected="selected" value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="status" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+
+            <dl>
+                <dt>管理费（‱）：</dt>
+                <dd>
+                    <input class="text w2" data-val="true" data-val-number="字段 管理费 必须是一个数字。" data-val-range="管理费必须在0到999999999之间" data-val-range-max="999999999" data-val-range-min="0" data-val-required="请输入管理费" id="rate" name="rate" placeholder="请输入管理费" type="text" value="{$data.rate}">
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="rate" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>清算类型：</dt>
+                <dd>
+                    <select class="sel-box w2" data-val="true" data-val-number="字段 清算类型 必须是一个数字。" data-val-required="请选择清算类型" id="state_type" name="state_type"><option value="">===请选择清算类型===</option>
+                        <option selected="selected" value="1">市场结算方式</option>
+                        <option value="2">只计算管理费</option>
+                    </select>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="state_type" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <dl>
+                <dt>收取过户费：</dt>
+                <dd>
+                    <select class="sel-box w2" data-val="true" data-val-required="请选择是否收取过户费" id="is_transferfee" name="is_transferfee"><option value="">===是否收取过户费===</option>
+                        <option selected="selected" value="true">是</option>
+                        <option value="false">否</option>
+                    </select>
+                    <div>
+                        <span class="field-validation-valid Validform_checktip" data-valmsg-for="is_transferfee" data-valmsg-replace="true"></span>
+                    </div>
+                </dd>
+                <div class="Validform_bt">必填</div>
+            </dl>
+            <div id="is_fund" style="display:none">
+
+                <dl>
+                    <dt>基金编号：</dt>
+                    <dd>
+                        <input class="text w2" data-val="true" data-val-required="请输入基金编号" id="fund_num" name="fund_num" placeholder="请输入基金编号" type="text" value="">
+                        <div>
+                            <span class="field-validation-valid Validform_checktip" data-valmsg-for="fund_num" data-valmsg-replace="true"></span>
+                        </div>
+                    </dd>
+                    <div class="Validform_bt">必填</div>
+                </dl>
+                <dl>
+                    <dt>组合编号：</dt>
+                    <dd>
+                        <input class="text w2" data-val="true" data-val-required="请输入组合编号" id="com_num" name="com_num" placeholder="请输入组合编号" type="text" value="">
+                        <div>
+                            <span class="field-validation-valid Validform_checktip" data-valmsg-for="com_num" data-valmsg-replace="true"></span>
+                        </div>
+                    </dd>
+                    <div class="Validform_bt">必填</div>
+                </dl>
+                <dl>
+                    <dt>资产编号：</dt>
+                    <dd>
+                        <input class="text w2" data-val="true" data-val-required="请输入资产编号" id="unit_num" name="unit_num" placeholder="请输入资产编号" type="text" value="">
+                        <div>
+                            <span class="field-validation-valid Validform_checktip" data-valmsg-for="unit_num" data-valmsg-replace="true"></span>
+                        </div>
+                    </dd>
+                    <div class="Validform_bt">必填</div>
+                </dl>
+            </div>
+        </div>
+        <div class="de">
+            <div class="button">
+                <button type="submit" class="de-button bg-blue" id="editsubmit" data-loading-text="保存中...">确定</button>
+                <button type="button" class="de-button bg-gray" onclick="parent.layer.close(parent.layer.getFrameIndex(window.name))">取消</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<script type="text/javascript">
+    $(function () {
+        ChangeType();
+    })
+    var ChangeCounter = function () {
+        $("#trade_counter_sales_id").get(0).options.length = 0; //清空下拉框
+        $("<option></option>").val("").text("==请选择营业部==").appendTo($("#trade_counter_sales_id"));
+        var counter_id = $("#counter_id").val();//柜台ID
+        var counter = JSON.parse('[{"id":10,"name":"广发恒生UFX正式柜台","code":"001","status":1,"config_id":2,"type":2,"add_time":"2016-07-28T11:31:04.66+08:00","del_time":null,"is_del":false,"puship":"116.228.246.89","pushport":"11010","callbackip":"116.228.246.89","callbackport":"11011","version":"0","trade_account":[],"trade_counter_sales":[],"trade_sys_config":null,"trade_entruste":[]},{"id":11,"name":"银河普通柜台","code":"002","status":1,"config_id":2,"type":3,"add_time":"2016-08-01T14:39:25.96+08:00","del_time":null,"is_del":false,"puship":"113.98.240.8","pushport":"7708","callbackip":null,"callbackport":null,"version":"7.02","trade_account":[],"trade_counter_sales":[{"id":7,"name":"默认营业部","code":"20","type":1,"conunter_id":11,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":12,"name":"广发恒生UFX测试柜台","code":"003","status":1,"config_id":2,"type":1,"add_time":"2016-08-18T10:08:17+08:00","del_time":null,"is_del":false,"puship":"183.6.169.83","pushport":"9003","callbackip":"183.6.169.83","callbackport":"9009","version":"0","trade_account":[],"trade_counter_sales":[],"trade_sys_config":null,"trade_entruste":[]},{"id":13,"name":"华鑫普通柜台","code":"004","status":1,"config_id":2,"type":4,"add_time":"2016-10-19T10:51:08.767+08:00","del_time":null,"is_del":false,"puship":"124.74.201.13","pushport":"7608","callbackip":null,"callbackport":null,"version":"7.02","trade_account":[],"trade_counter_sales":[{"id":6,"name":"默认营业部","code":"10","type":1,"conunter_id":13,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":14,"name":"西南普通柜台","code":"005","status":1,"config_id":2,"type":5,"add_time":"2016-10-24T10:24:29.66+08:00","del_time":null,"is_del":false,"puship":"222.178.70.12","pushport":"7708","callbackip":null,"callbackport":null,"version":"7.02","trade_account":[],"trade_counter_sales":[{"id":5,"name":"默认营业部","code":"1","type":1,"conunter_id":14,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":15,"name":"招商普通柜台","code":"006","status":1,"config_id":2,"type":6,"add_time":"2016-11-01T09:07:10.42+08:00","del_time":null,"is_del":false,"puship":"180.166.64.91","pushport":"443","callbackip":null,"callbackport":null,"version":"2.37","trade_account":[],"trade_counter_sales":[{"id":4,"name":"默认营业部","code":"0","type":1,"conunter_id":15,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":16,"name":"东兴普通柜台","code":"007","status":1,"config_id":2,"type":7,"add_time":"2016-11-02T15:59:15.18+08:00","del_time":null,"is_del":false,"puship":"114.80.178.210","pushport":"7758","callbackip":null,"callbackport":null,"version":"8.01","trade_account":[],"trade_counter_sales":[{"id":3,"name":"默认营业部","code":"0","type":1,"conunter_id":16,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":17,"name":"长城普通柜台","code":"008","status":1,"config_id":2,"type":8,"add_time":"2016-11-07T14:13:36.26+08:00","del_time":null,"is_del":false,"puship":"60.191.123.155","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":2,"name":"默认营业部","code":"1","type":1,"conunter_id":17,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":18,"name":"华西普通柜台","code":"009","status":1,"config_id":2,"type":9,"add_time":"2016-11-15T13:20:37.333+08:00","del_time":null,"is_del":false,"puship":"218.6.198.172","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":1,"name":"默认交易部","code":"1500","type":1,"conunter_id":18,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":19,"name":"广发普通柜台","code":"010","status":1,"config_id":2,"type":11,"add_time":"2016-12-21T18:25:06.39+08:00","del_time":null,"is_del":false,"puship":"183.63.121.125","pushport":"80","callbackip":null,"callbackport":null,"version":"7.20","trade_account":[],"trade_counter_sales":[{"id":8,"name":"默认营业部","code":"0","type":1,"conunter_id":19,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":20,"name":"海通普通柜台","code":"011","status":1,"config_id":2,"type":13,"add_time":"2016-12-21T19:31:29.98+08:00","del_time":null,"is_del":false,"puship":"218.80.248.229","pushport":"7708","callbackip":null,"callbackport":null,"version":"1.26","trade_account":[],"trade_counter_sales":[{"id":9,"name":"默认营业部","code":"0","type":1,"conunter_id":20,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":21,"name":"新时代柜台","code":"xsdgt","status":1,"config_id":2,"type":15,"add_time":"2017-01-10T13:32:40.93+08:00","del_time":null,"is_del":false,"puship":"125.71.208.120","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":10,"name":"福州营业部","code":"16","type":1,"conunter_id":21,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":22,"name":"申万宏源普通交易","code":"swhy01","status":1,"config_id":2,"type":16,"add_time":"2017-02-10T10:46:23.96+08:00","del_time":null,"is_del":false,"puship":"222.66.114.36","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.45","trade_account":[],"trade_counter_sales":[{"id":11,"name":"普通交易营业部","code":"0","type":1,"conunter_id":22,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":23,"name":"华林证券普通柜台","code":"hlzq01","status":1,"config_id":2,"type":17,"add_time":"2017-02-17T13:56:27.933+08:00","del_time":null,"is_del":false,"puship":"202.96.138.70","pushport":"80","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":12,"name":"普通交易","code":"0","type":1,"conunter_id":23,"trade_counter":null},{"id":13,"name":"融资融券交易","code":"1","type":2,"conunter_id":23,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":24,"name":"海通融券柜台","code":"HTRQ","status":1,"config_id":2,"type":13,"add_time":"2017-03-16T09:18:01.23+08:00","del_time":null,"is_del":false,"puship":"218.80.248.229","pushport":"7706","callbackip":null,"callbackport":null,"version":"1.26","trade_account":[],"trade_counter_sales":[{"id":14,"name":"默认营业部","code":"9999","type":2,"conunter_id":24,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":25,"name":"华福普通柜台","code":"HF01","status":1,"config_id":2,"type":19,"add_time":"2017-03-24T09:44:43.247+08:00","del_time":null,"is_del":false,"puship":"tdxwt.hfzq.com.cn","pushport":"8081","callbackip":null,"callbackport":null,"version":"6.1","trade_account":[],"trade_counter_sales":[{"id":15,"name":"默认营业部","code":"1","type":1,"conunter_id":25,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":26,"name":"中泰普通柜台","code":"zhongtai001","status":1,"config_id":2,"type":21,"add_time":"2017-04-05T15:57:35.567+08:00","del_time":null,"is_del":false,"puship":"124.117.238.132","pushport":"7700","callbackip":null,"callbackport":null,"version":"1.19","trade_account":[],"trade_counter_sales":[{"id":16,"name":"普通交易","code":"0","type":1,"conunter_id":26,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":27,"name":"中信建投信用柜台","code":"zxjtxygt","status":1,"config_id":2,"type":10,"add_time":"2017-04-11T13:29:20.35+08:00","del_time":null,"is_del":false,"puship":"202.130.235.187","pushport":"7708","callbackip":null,"callbackport":null,"version":"7.00","trade_account":[],"trade_counter_sales":[{"id":17,"name":"普通交易","code":"2","type":1,"conunter_id":27,"trade_counter":null},{"id":18,"name":"信用交易","code":"9999","type":2,"conunter_id":27,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":28,"name":"华融基金柜台","code":"hrjjgt","status":1,"config_id":2,"type":23,"add_time":"2017-04-14T11:02:26.26+08:00","del_time":null,"is_del":false,"puship":"211.151.33.229","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":19,"name":"成都青龙街营业部","code":"5101","type":1,"conunter_id":28,"trade_counter":null},{"id":20,"name":"福州乌山路营业部","code":"3501","type":1,"conunter_id":28,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":29,"name":"东兴证券信用柜台","code":"dxgtcredit","status":1,"config_id":2,"type":22,"add_time":"2017-04-14T12:59:10.727+08:00","del_time":null,"is_del":false,"puship":"120.35.26.141","pushport":"7755","callbackip":null,"callbackport":null,"version":"8.01","trade_account":[],"trade_counter_sales":[{"id":21,"name":"信用交易","code":"0","type":2,"conunter_id":29,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":30,"name":"平安证券柜台","code":"pazq01","status":1,"config_id":2,"type":24,"add_time":"2017-04-21T15:10:02.463+08:00","del_time":null,"is_del":false,"puship":"202.69.19.56","pushport":"7738","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":22,"name":"融资融券","code":"1088","type":2,"conunter_id":30,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":31,"name":"兴业证券普通柜台","code":"xyzq01","status":1,"config_id":2,"type":12,"add_time":"2017-05-04T10:12:16.557+08:00","del_time":null,"is_del":false,"puship":"tdxwt.xyzq.com.cn","pushport":"7758","callbackip":null,"callbackport":null,"version":"6.55","trade_account":[],"trade_counter_sales":[{"id":23,"name":"普通交易营业部","code":"1","type":1,"conunter_id":31,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":32,"name":"华金普通柜台","code":"5858","status":1,"config_id":2,"type":67,"add_time":"2017-12-18T16:24:31.277+08:00","del_time":null,"is_del":false,"puship":"221.239.33.2","pushport":"7708","callbackip":null,"callbackport":null,"version":"7.0","trade_account":[],"trade_counter_sales":[{"id":24,"name":"普通营业部","code":"1","type":1,"conunter_id":32,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":33,"name":"国信信用柜台","code":"5656","status":1,"config_id":2,"type":39,"add_time":"2017-12-18T16:29:45.873+08:00","del_time":null,"is_del":false,"puship":"42.159.201.205","pushport":"7708","callbackip":null,"callbackport":null,"version":"7.00","trade_account":[],"trade_counter_sales":[],"trade_sys_config":null,"trade_entruste":[]},{"id":34,"name":"江海普通柜台","code":"3242","status":1,"config_id":2,"type":66,"add_time":"2017-12-18T16:33:26.607+08:00","del_time":null,"is_del":false,"puship":"222.171.164.13","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.00","trade_account":[],"trade_counter_sales":[{"id":25,"name":"普通营业部","code":"1","type":1,"conunter_id":34,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":35,"name":"兴业信用柜台","code":"4565","status":1,"config_id":2,"type":51,"add_time":"2017-12-18T16:38:16.35+08:00","del_time":null,"is_del":false,"puship":"61.154.12.52","pushport":"7758","callbackip":null,"callbackport":null,"version":"6.55","trade_account":[],"trade_counter_sales":[{"id":26,"name":"信用营业部","code":"2","type":2,"conunter_id":35,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]},{"id":36,"name":"银泰普通柜台","code":"5858","status":1,"config_id":2,"type":48,"add_time":"2017-12-18T16:52:02.927+08:00","del_time":null,"is_del":false,"puship":"121.15.4.125","pushport":"7708","callbackip":null,"callbackport":null,"version":"6.18","trade_account":[],"trade_counter_sales":[{"id":27,"name":"普通柜台","code":"32","type":1,"conunter_id":36,"trade_counter":null}],"trade_sys_config":null,"trade_entruste":[]}]');
+        var fitercounter = $.map(counter, function (item, index) {
+            if (item.id == counter_id) {
+                return item;
+            }
+        });
+        $.each(fitercounter[0].trade_counter_sales, function (i, item) {
+            $("<option></option>").val(item["id"]).text(item["name"]).appendTo($("#trade_counter_sales_id"));
+        });
+    }
+    var ChangeType = function () {
+        if ($("#type").val() == "1") {
+            $("#is_fund").attr("style", "display:block");
+            $("#is_normal").attr("style", "display:none");
+        } else {
+            $("#is_fund").attr("style", "display:none");
+            $("#is_normal").attr("style", "display:block");
+        }
+    }
+    var OnBegin = function () {
+        $("#editsubmit").button("loading");
+    }
+    var OnComplete = function () {
+        $("#editsubmit").button("reset");
+    }
+    var OnSuccess = function (data) {
+        if (data.RequestResult) {
+            parent.layer.msg("修改成功", { icon: 1 });
+            if (window.parent.hasOwnProperty("goPage")) {
+                window.parent.goPage(1);
+            }
+            else {
+                window.parent.location.reload();
+            }
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+        else {
+            parent.layer.msg(data.Message, { icon: 2 });
+        }
+    }
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="../xmbyb/view/byb_head.html"></include>
+</head>
+<body style="margin: 130px 20px">
+<div id="inner-loading" style="display:none;">
+    <div style="height:100%;width:100%; text-align:center; vertical-align:middle; padding-top:70px;padding-bottom:70px;">
+        <img src="/Content/images/loading1.gif"><br>
+        加载中...
+    </div>
+</div>
+
+<div class="con-lr0" id="tradeContent">
+    <div>
+
+        <div class="tree-panel" id="pannel_OrgTree">
+            <div class="tree-title">
+                组织机构<span class="qsfont qsicon-refresh tree_refresh"></span>
+            </div>
+            <div class="tree-content">
+                <div id="OrgTree" data-url="/Component/OrgTree/GetTreeModel?isorg=True&amp;isstat=True&amp;assetunit_ids=-1&amp;assetunit_id=0" class="jstree jstree-1 jstree-default" role="tree" tabindex="0" aria-activedescendant="sta_69" aria-busy="false">
+                    <ul class="jstree-container-ul jstree-children" role="group">
+                        <li role="treeitem" aria-selected="false" aria-level="1" aria-labelledby="org_13_anchor" aria-expanded="true" id="org_13" class="jstree-node  jstree-open jstree-last">
+                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                            <a class="jstree-anchor" href="#" tabindex="-1" id="org_13_anchor">
+                                <i class="jstree-icon jstree-themeicon glyphicon glyphicon-home jstree-themeicon-custom" role="presentation"></i>厦门奔一奔</a>
+                            <ul role="group" class="jstree-children">
+                                <li role="treeitem" aria-selected="false" aria-level="2" aria-labelledby="dep_35_anchor" aria-expanded="true" id="dep_35" class="jstree-node  jstree-open jstree-last">
+                                    <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                                    <a class="jstree-anchor" href="#" tabindex="-1" id="dep_35_anchor">
+                                        <i class="jstree-icon jstree-themeicon glyphicon glyphicon-th-large jstree-themeicon-custom" role="presentation"></i>奔一奔交易部</a>
+                                    <ul role="group" class="jstree-children">
+                                        <li role="treeitem" aria-selected="false" aria-level="3" aria-labelledby="sta_69_anchor" id="sta_69" class="jstree-node  jstree-leaf jstree-last">
+                                            <i class="jstree-icon jstree-ocl" role="presentation"></i>
+                                            <a class="jstree-anchor" href="#" tabindex="-1" id="sta_69_anchor">
+                                                <i class="jstree-icon jstree-themeicon glyphicon glyphicon-user jstree-themeicon-custom" role="presentation"></i>交易员岗位</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="sup-tit dis-left-280">
+        <h3><i class="i17"></i>用户管理
+            <a href="/Manager/User/Create" id="add" rel="" title="添加用户" data-width="550px" data-height="740px"><span class="add-button">+添加用户</span></a>
+        </h3>
+        <!-- 表格 -->
+        <div class="searchs">
+            <form action="/Manager/User/SysUser" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#list" id="List_submit" method="post" novalidate="novalidate">
+                <input data-val="true" data-val-number="字段 PageIndex 必须是一个数字。" data-val-required="PageIndex 字段是必需的。" id="PageIndex" name="PageIndex" type="hidden" value="1">
+                <input data-val="true" data-val-number="字段 PageSize 必须是一个数字。" data-val-required="PageSize 字段是必需的。" id="PageSize" name="PageSize" type="hidden" value="15">
+                <input data-val="true" data-val-number="字段 TypeID 必须是一个数字。" data-val-required="TypeID 字段是必需的。" id="TypeID" name="TypeID" type="hidden" value="13">
+                <input data-val="true" data-val-number="字段 Type 必须是一个数字。" data-val-required="Type 字段是必需的。" id="Type" name="Type" type="hidden" value="2">
+                <input data-val="true" data-val-number="字段 OrgID 必须是一个数字。" data-val-required="OrgID 字段是必需的。" id="OrgID" name="OrgID" type="hidden" value="13">
+                <ul>
+                <li>
+                    <span>姓名：</span>
+                    <input class="text w4" id="UserName" name="UserName" placeholder="请输入姓名搜索" type="text" value="">
+                </li>
+                <button type="button" onclick="Search()" class="all-button">搜索</button>
+                <input type="submit" id="list_submit" style="display:none;">
+            </ul>
+            </form>
+        </div>
+        <div class="surper-box font12" id="list">
+            <table>
+                <tbody><tr class="title">
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>所属部门</td>
+                    <td>所属岗位</td>
+                    <td>手机号码</td>
+                    <td>电子邮件</td>
+                    <td>身份证号</td>
+                    <td style="width:8%">状态</td>
+                    <td style="width:20%">操作</td>
+                </tr>
+
+                    <foreach name="data" item="v">
+                        <tr class="">
+                            <td>{$v.User_Name}</td>
+                            <td>{$v.RealName}</td>
+                            <td><if condition="$v.DeptID eq 1">厦门盈透 <elseif condition="$v.DeptID eq 2">防守打法</elseif></if></td>
+                            <td>{$v.StationID}</td>
+                            <td>{$v.UserPhone}</td>
+                            <td>{$v.Email}</td>
+                            <td>{$v.UserCer}</td>
+                            <td>
+                                <button class="switch-qy" rel="SFRBTDRUV1V5RGM9" onclick="ChangeUserStatus('SFRBTDRUV1V5RGM9',1)">
+                                    <span></span>
+                                </button>
+                            </td>
+                            <td>
+                                <a href="javascript:;" rel="/Manager/User/Edit?id={$v.id}" titl="编辑用户" data-width="500px" data-height="730px" class="showif-user">
+                                    <button type="button" class="cz-button bg-blue">编辑</button>
+                                </a>
+                                <a href="javascript:;" rel="/Manager/User/ResetPwd?id={$v.id}" titl="重置密码" data-width="500px" data-height="300px" class="showif-user">
+                                    <button type="button" class="cz-button bg-orange">重置密码</button>
+                                </a>
+                                <button type="button" rel="213" onclick="Delete('SFRBTDRUV1V5RGM9')" class="cz-button bg-red">删除</button>
+                            </td>
+                        </tr>
+                    </foreach>
+
+
+                </tbody></table>
+            <!--<div class="pagination-container"><ul class="pull-right no-margin pagination"><li class="disabled PagedList-pageCountAndLocation"><a>第 1 页 / 共 2 页</a></li><li class="disabled PagedList-skipToFirst"><a>««</a></li><li class="disabled PagedList-skipToPrevious"><a rel="prev">«</a></li><li class="active"><a>1</a></li><li><a onclick="goPageUser(2)">2</a></li><li class="PagedList-skipToNext"><a onclick="goPageUser(2)" rel="next">»</a></li><li class="PagedList-skipToLast"><a onclick="goPageUser(2)">»»</a></li></ul></div>-->
+
+            <script type="text/javascript">
+                $('.showif-user').on('click', function () {
+                    layer.open({
+                        type: 2,
+                        title: $(this).attr("titl"),
+                        shadeClose: true,
+                        shade: 0.9,
+                        area: [$(this).attr("data-width"), $(this).attr("data-height")],
+                        content: $(this).attr("rel")
+                    });
+                });
+
+                window.parent.layer.closeAll("loading");
+
+            </script>
+            <!-- 翻页 -->
+
+        </div>
+
+    </div>
+    <script type="text/javascript">
+//        $('.showif').on('click', function () {
+//            layer.open({
+//                type: 2,
+//                title: $(this).attr("titl"),
+//                shadeClose: true,
+//                shade: 0.9,
+//                area: [$(this).attr("data-width"), $(this).attr("data-height")],
+//                content: $(this).attr("rel")
+//            });
+//        });
+
+        var opencreatepage = function (element) {
+            var item = $(element);
+            $.get("/Manager/User/CheckUserLimit", null, function (data) {
+                if (data=="False") {
+                    layer.msg("已经超过最大用户数", { icon: 2 });
+                }
+                else {
+                    layer.open({
+                        type: 2,
+                        title: item.attr("title"),
+                        shadeClose: true,
+                        shade: 0.9,
+                        area: [item.attr("data-width"), item.attr("data-height")],
+                        content: item.attr("rel")
+                    });
+                }
+            })
+
+        }
+
+        var OnTreeClick = function (id) {
+            //layer.load();
+            $("#PageIndex").val(1);
+            $("#UserName").val("");
+            if (id.indexOf('org') > -1) {
+                $("#TypeID").val(id.replace(/[^0-9]/ig, ""));
+                $("#Type").val(2);
+            }
+            if (id.indexOf('dep') > -1) {
+                $("#TypeID").val(id.replace(/[^0-9]/ig, ""));
+                $("#Type").val(1);
+            } if (id.indexOf('sta') > -1) {
+                $("#TypeID").val(id.replace(/[^0-9]/ig, ""));
+                $("#Type").val(0);
+            }
+            $("#list_submit").click();
+        }
+        var Search = function () {
+            //layer.load();
+            $("#PageIndex").val(1);
+            $("#list_submit").click();
+        }
+        var goPageUser = function (i) {
+            //layer.load();
+            $("#PageIndex").val(i);
+            $("#list_submit").click();
+        }
+        var ChangeUserStatus = function (id,status) {
+            var msg = "确定要禁用用户吗？禁用后该用户将不能登入系统！";
+            if (status =="0")
+                msg = "确定要启用用户吗？"
+            layer.confirm(msg,{
+                title: "确定要改变用户的状态?",
+                icon:3
+            }, function (index) {
+                $.ajax({
+                    url: "/Manager/User/ChangeUserStatus",
+                    data: { userid: id },
+                    type: "POST",
+                    dateType: "json",
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            goPageUser($("#PageIndex").val());
+                            layer.msg( "用户状态已改变！",{icon:1});
+                        }
+                        else {
+                            layer.msg( data.ErrorMessage, { icon: 1 });
+                        } layer.close(index);
+                    },
+                    error: function () {
+                        layer.close(index);
+                    },
+                });
+            });
+        }
+        var Delete = function (i) {
+            layer.confirm("即将删除用户相关信息，删除后将不可恢复！",{
+                title: "确定要删除用户吗?",
+                icon:3
+            }, function (index) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Manager/User/Delete?userid=" + i,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            goPageUser($("#PageIndex").val());
+                            layer.msg( "用户信息已被删除！", {icon:1});
+                        }
+                        else {
+                            layer.msg( data.ErrorMessage, {icon:2});
+                        } layer.close(index);
+                    },
+                    error: function (error) {
+                        //alert(error.Message);
+                        layer.close(index);
+                    }
+                });
+            });
+
+        }
+    </script>
+
+</div>
+<script type="text/javascript">
+    $('.add-button').click(function () {
+        $('#add').trigger('click');
+    })
+//    $(function () {
+//        if(''=="")
+//        {
+//            $("#tradeContent").removeClass("con-lr-200").addClass("con-lr0");
+//        }
+//    })
+</script>
+
+
+
+</body>
+</html>
